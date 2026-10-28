@@ -1,0 +1,12 @@
+define user ask off topic
+  "how do I bake a cake?"
+  "write a python script"
+  "what is the capital of France?"
+  "who won the football match?"
+
+define bot refuse off topic
+  "I am a legal and compliance assistant restricted to the Cine Act 1952. I cannot answer non-legal questions."
+
+define flow
+  user ask off topic
+  bot refuse off topic

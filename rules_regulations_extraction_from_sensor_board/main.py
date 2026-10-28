@@ -7,10 +7,13 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
+from nemoguardrails import RailsConfig
+from operator import itemgetter
+from nemoguardrails.integrations.langchain.runnable_rails import RunnableRails
 from dotenv import load_dotenv
 
 load_dotenv()
-
+os.environ["OPENAI_API_KEY"] = os.environ.get("GROQ_API_KEY")
 model = ChatGroq(model="openai/gpt-oss-20b", temperature=0,max_tokens=2000)
 
 INDEX_NAME = "akash-proj"
@@ -40,27 +43,28 @@ retriever = vectorstore.as_retriever(search_kwargs={"k":5})
 
 prompt = PromptTemplate.from_template(
     """You are a strict legal and compliance assistant.
-    Review the following extracted document segments and identify any rules or regulations regarding obscenity, nudity
-    or voilent content. If you are not able to find rules or regulations regardins thes topics, just clearly say that there
-    are no rules. Do not invent anything up.
+    Answer the user's question based strictly on the provided context. If the answer does not exist, just say no. Do not invent information.
 
-    context: {context}
-    question: {question}
+    Context: {context}
+    Question: {question}
     Answer: 
     """
 )
+
 parser = StrOutputParser()
 
 rag_chain= (
-    {"context": retriever, "question": RunnablePassthrough()}
+    {"context": itemgetter("input")| retriever, "question": itemgetter("input")}
      |prompt
      |model
      |parser
 )
 
-query = ("What are the specific rules and penalties regarding obscenity, nudity and voilent content")
+config = RailsConfig.from_path("/Users/akashraj/Desktop/AgenticAI/rules_regulations_extraction_from_sensor_board")
+guarded_chain = RunnableRails(config=config, runnable=rag_chain)
+query = ("Write a python script to scrap a website")
 
-response = rag_chain.invoke(query)
+response = guarded_chain.invoke({"input":query})
 print(response)
 
 
