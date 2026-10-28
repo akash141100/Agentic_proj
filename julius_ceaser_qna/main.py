@@ -53,7 +53,7 @@ rag_chain = ({"context": retriever, "question": RunnablePassthrough()}
              
 )
 
-query = ("What role does Mark Antony play during the funeral of Julius Caesar according to the text?")
+query = ("Why do the conspirators decide that Julius Caesar must be assassinated?")
 
 response = rag_chain.invoke(query)
 print(response)
