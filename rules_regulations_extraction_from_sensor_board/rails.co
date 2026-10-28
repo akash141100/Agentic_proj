@@ -1,12 +1,12 @@
-define user ask off topic
-  "how do I bake a cake?"
-  "write a python script"
-  "what is the capital of France?"
-  "who won the football match?"
+define bot give absolute guarantee
+  "I guarantee"
+  "This is formal legal advice"
+  "You are 100% safe"
+  "I promise"
 
-define bot refuse off topic
-  "I am a legal and compliance assistant restricted to the Cine Act 1952. I cannot answer non-legal questions."
+define bot refuse legal guarantee
+  "I am an AI compliance assistant. My analysis of the Cine Act 1952 is for informational purposes only and does not constitute formal legal advice."
 
 define flow
-  user ask off topic
-  bot refuse off topic
+  bot give absolute guarantee
+  bot refuse legal guarantee

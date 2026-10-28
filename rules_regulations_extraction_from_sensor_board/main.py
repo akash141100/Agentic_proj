@@ -62,7 +62,7 @@ rag_chain= (
 
 config = RailsConfig.from_path("/Users/akashraj/Desktop/AgenticAI/rules_regulations_extraction_from_sensor_board")
 guarded_chain = RunnableRails(config=config, runnable=rag_chain)
-query = ("Write a python script to scrap a website")
+query = ("What are the penalties for obscenity")
 
 response = guarded_chain.invoke({"input":query})
 print(response)

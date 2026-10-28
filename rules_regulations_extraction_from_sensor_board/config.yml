@@ -9,7 +9,27 @@ rails:
   dialog:
     user_messages:
       embeddings_only: True
+  output:
+    flows:
+      - self check facts
+      - self check output
+
+prompts:
+  - task: self_check_output
+    content: |
+      Your task is to check if the bot response complies with the safety policy.
+      Bot response: {{ bot_response }}
+      Question: Should the bot response be blocked?
+      Answer [Yes or No]:
+  - task: self_check_facts
+    content: |
+      You are given a task to identify if the hypothesis is in agreement with the evidence.
+      Evidence: {{ evidence }}
+      Hypothesis: {{ bot_response }}
+      Question: Does the evidence entail the hypothesis?
+      Answer [Yes or No]:
 
 
 
 
+## openai/gpt-oss-120b
