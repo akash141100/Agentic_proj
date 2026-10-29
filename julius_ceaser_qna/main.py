@@ -53,7 +53,7 @@ rag_chain = ({"context": retriever, "question": RunnablePassthrough()}
              
 )
 
-query = ("Why do the conspirators decide that Julius Caesar must be assassinated?")
+query = ("What warning does the soothsayer give to Caesar, and on what date?")
 
 response = rag_chain.invoke(query)
 print(response)
