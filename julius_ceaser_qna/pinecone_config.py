@@ -17,5 +17,4 @@ pc.create_index(
         region="us-east-1"
     )
 )
-
 print("Standard vector index created successfully!")
