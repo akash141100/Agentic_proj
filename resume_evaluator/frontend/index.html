@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise ATS Evaluator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-glow"></div>
+            <h1>RAG-Powered AI Evaluator</h1>
+            <p>Upload a candidate's resume and job description for an instant matrix analysis.</p>
+        </header>
+
+        <main>
+            <form id="evalForm">
+                <div class="input-group">
+                    <label for="jd">Job Description</label>
+                    <textarea id="jd" required placeholder="Paste the complete job description here..."></textarea>
+                    <div class="focus-border"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="resume">Candidate Resume (PDF)</label>
+                    <input type="file" id="resume" accept="application/pdf" required>
+                </div>
+
+                <button type="submit" id="submitBtn">
+                    <span>Analyze Candidate</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </form>
+
+            <div id="loading" class="hidden">
+                <div class="loader">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+                <p class="loading-text">Running Vector Retrieval & LLM Inference...</p>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="result-header">
+                    <h2>Overall Match: <span id="matchScore"></span></h2>
+                </div>
+                
+                <div class="cards-container">
+                    <div class="card stat-card" style="--delay: 0.1s">
+                        <div class="card-icon">🎓</div>
+                        <h3>Qualifications Match</h3>
+                        <p id="qualifications"></p>
+                    </div>
+
+                    <div class="card stat-card" style="--delay: 0.2s">
+                        <div class="card-icon">⚡</div>
+                        <h3>Skills Match</h3>
+                        <p id="skills"></p>
+                    </div>
+
+                    <div class="card stat-card" style="--delay: 0.3s">
+                        <div class="card-icon">💼</div>
+                        <h3>Experience Match</h3>
+                        <p id="experience"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
