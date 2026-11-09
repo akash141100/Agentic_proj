@@ -30,7 +30,7 @@ class ResumeEvaluation(BaseModel):
     qualification_match: str = Field(description="Analysis of Education and professional Qualification.")
     skill_match: str = Field(description="Analysis of skill matching with the job description.")
     experience_match: str = Field(description="Evaluation of years of experience and domain relevance.")
-    overall_match: str = Field(description="Strictly output exactly one of: 'High', 'Medium', or 'Low'")
+    overall_match: str = Field(description="Give me a summary of what's missing from it being a good match.")
 
 pc = Pinecone(api_key = os.getenv("PINECONE_API_KEY"))
 index_name = "akash-proj-resume-evaluator"
