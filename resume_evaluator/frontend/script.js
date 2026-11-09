@@ -21,7 +21,8 @@ document.getElementById('evalForm').addEventListener('submit', async (e) => {
     formData.append('resume', resumeFile);
 
     try {
-        const response = await fetch('http://localhost:8000/api/evaluate', {
+        const response = await fetch('https://ats-backend-api.onrender.com/api/evaluate', {
+
             method: 'POST',
             body: formData
         });
