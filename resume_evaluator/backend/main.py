@@ -62,6 +62,7 @@ def extract_text(file: UploadFile) -> str:
 async def evaluate_candidate(jd: str = Form(...), resume: UploadFile = File(...)):
     if not resume.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail=" Only pdf is allowed to be uploaded")
+    embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/all-MiniLM-L6-v2")
     raw_text = extract_text(resume)
     print("\n--- EXTRACTED RESUME TEXT ---")
     print(repr(raw_text))
