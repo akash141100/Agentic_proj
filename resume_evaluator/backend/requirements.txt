@@ -10,3 +10,4 @@ pinecone-client
 python-dotenv
 pydantic
 sentence-transformers
+langchain-text-splitters
