@@ -1,6 +1,5 @@
 import uuid
 import os
-import pdfplumber
 import shutil
 from pypdf import PdfReader
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
