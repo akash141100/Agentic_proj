@@ -32,6 +32,7 @@ class ResumeEvaluation(BaseModel):
     overall_match: str = Field(description="Give me a summary of what's missing from it being a good match.")
 
 pc = Pinecone(api_key = os.getenv("PINECONE_API_KEY"))
+
 index_name = "akash-proj-resume-evaluator"
 
 embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/all-MiniLM-L6-v2")
