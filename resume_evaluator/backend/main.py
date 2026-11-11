@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from langchain_groq import ChatGroq
@@ -35,7 +35,10 @@ pc = Pinecone(api_key = os.getenv("PINECONE_API_KEY"))
 
 index_name = "akash-proj-resume-evaluator"
 
-embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/all-MiniLM-L6-v2")
+embeddings = HuggingFaceEndpointEmbeddings(
+        model="sentence-transformers/all-MiniLM-L6-v2",
+        huggingfacehub_api_token=os.getenv("HF_TOKEN")
+    )
 
 def extract_text(file: UploadFile) -> str:
     # Save the file temporarily to disk to avoid FastAPI memory buffer issues
@@ -63,7 +66,7 @@ def extract_text(file: UploadFile) -> str:
 async def evaluate_candidate(jd: str = Form(...), resume: UploadFile = File(...)):
     if not resume.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail=" Only pdf is allowed to be uploaded")
-    embeddings = HuggingFaceEmbeddings(model_name = "sentence-transformers/all-MiniLM-L6-v2")
+    
     raw_text = extract_text(resume)
     print("\n--- EXTRACTED RESUME TEXT ---")
     print(repr(raw_text))
