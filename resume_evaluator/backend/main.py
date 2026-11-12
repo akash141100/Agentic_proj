@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 load_dotenv()
 app = FastAPI(title='ATS resume evaluator')
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
