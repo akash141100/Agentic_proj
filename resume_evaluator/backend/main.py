@@ -116,9 +116,4 @@ async def evaluate_candidate(jd: str = Form(...), resume: UploadFile = File(...)
 if __name__=="__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
     
-
-
-
